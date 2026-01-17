@@ -4,13 +4,28 @@ import type { Product } from '@/types/data';
 
 type ProductListProps = {
   products: Product[];
+  selected: Product | null;
+  onPress: (product: Product) => void;
 };
 
-export const ProductList = ({ products }: ProductListProps) => {
+export const ProductList = ({
+  products,
+  selected,
+  onPress,
+}: ProductListProps) => {
   return (
     <>
       {products.map((product, index) => (
-        <TouchableOpacity key={index} style={styles.row}>
+        <TouchableOpacity
+          key={index}
+          style={[
+            styles.row,
+            styles.button,
+            selected === product && styles.active,
+            index !== products.length - 1 && styles.buttonGap,
+          ]}
+          onPress={() => onPress(product)}
+        >
           <View>{product.icon}</View>
           <View style={styles.info}>
             <View style={styles.row}>
@@ -44,5 +59,17 @@ const styles = StyleSheet.create({
   textThrough: {
     marginLeft: 10,
     textDecorationLine: 'line-through',
+  },
+  button: {
+    width: '100%',
+    backgroundColor: '#F8F8F8',
+    padding: 10,
+    borderRadius: 20,
+  },
+  active: {
+    backgroundColor: '#F7D885',
+  },
+  buttonGap: {
+    marginBottom: 10,
   },
 });
