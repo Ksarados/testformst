@@ -1,13 +1,32 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import type { StackNavigationProp } from '@react-navigation/stack';
 import { Button } from '@/components/ui/button/Button';
 import { ProductList } from '@/components/ProductList/ProductList';
 import { PRODUCTS } from '@/constants/data';
 import type { Product } from '@/types/data';
+import { useProductStore } from '@/store/useProduct';
+import { useNavigation } from '@react-navigation/native';
+
+import type { MainNavigatorParamList } from '@/types/navigation';
+
+type OnboardingScreenNavigationProp = StackNavigationProp<
+  MainNavigatorParamList,
+  'Onboarding'
+>;
 
 export const PaywallScreen = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const { setProduct } = useProductStore();
+  const navigation = useNavigation<OnboardingScreenNavigationProp>();
+
+  const handleNext = () => {
+    if (selectedProduct) {
+      setProduct(selectedProduct);
+      navigation.navigate('Home');
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -21,7 +40,7 @@ export const PaywallScreen = () => {
           />
         </View>
       </View>
-      <Button title='Купить' onPress={() => {}} />
+      <Button title='Купить' onPress={handleNext} disabled={!selectedProduct} />
     </SafeAreaView>
   );
 };
