@@ -10,3 +10,8 @@ export type Product = {
   fullPrice?: number;
   icon: React.ReactNode;
 };
+
+export type Service = {
+  id: number;
+  name: string;
+};
