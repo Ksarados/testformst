@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 export function MainNavigation() {
   return (
     <Stack.Navigator
-      initialRouteName='Onboarding'
+      initialRouteName='Paywall'
       screenOptions={{
         headerShown: false,
       }}
