@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 export function MainNavigation() {
   return (
     <Stack.Navigator
-      initialRouteName='Home'
+      initialRouteName='Onboarding'
       screenOptions={{
         headerShown: false,
       }}
