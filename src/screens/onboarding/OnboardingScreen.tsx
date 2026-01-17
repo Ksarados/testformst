@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -12,19 +12,43 @@ type OnboardingScreenNavigationProp = StackNavigationProp<
   'Onboarding'
 >;
 
+type Onboarding = {
+  title: string;
+  text: string;
+  icon: React.ReactNode;
+};
+
+const ONBOARDING: Onboarding[] = [
+  {
+    title: 'О вас должны узнать!',
+    text: 'Покажите свой продук людям!',
+    icon: <CheckIcon />,
+  },
+  {
+    title: 'Больше клиентов, больше продаж!',
+    text: 'Привлекайте новых кливентов!',
+    icon: <CheckIcon />,
+  },
+];
+
 export const OnboardingScreen = () => {
   const navigation = useNavigation<OnboardingScreenNavigationProp>();
+  const [step, setStep] = useState(0);
 
   const handleNext = () => {
-    navigation.navigate('Paywall');
+    if (step < ONBOARDING.length - 1) {
+      setStep(step + 1);
+    } else {
+      navigation.navigate('Paywall');
+    }
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.onboarding}>
-        <Text style={styles.title}>О вас должны узнать!</Text>
-        <CheckIcon />
-        <Text style={styles.text}>Покажите свой продук людям!</Text>
+        <Text style={styles.title}>{ONBOARDING[step].title}</Text>
+        <View>{ONBOARDING[step].icon}</View>
+        <Text style={styles.text}>{ONBOARDING[step].title}</Text>
       </View>
       <Button onPress={handleNext} title='Next' />
     </SafeAreaView>
