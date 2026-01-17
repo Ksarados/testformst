@@ -4,32 +4,13 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '@/components/ui/button/Button';
-import CheckIcon from '@assets/icons/CheckIcon';
 import type { MainNavigatorParamList } from '@/types/navigation';
+import { ONBOARDING } from '@/constants/data';
 
 type OnboardingScreenNavigationProp = StackNavigationProp<
   MainNavigatorParamList,
   'Onboarding'
 >;
-
-type Onboarding = {
-  title: string;
-  text: string;
-  icon: React.ReactNode;
-};
-
-const ONBOARDING: Onboarding[] = [
-  {
-    title: 'О вас должны узнать!',
-    text: 'Покажите свой продук людям!',
-    icon: <CheckIcon />,
-  },
-  {
-    title: 'Больше клиентов, больше продаж!',
-    text: 'Привлекайте новых кливентов!',
-    icon: <CheckIcon />,
-  },
-];
 
 export const OnboardingScreen = () => {
   const navigation = useNavigation<OnboardingScreenNavigationProp>();
