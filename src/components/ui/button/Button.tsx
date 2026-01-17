@@ -11,7 +11,7 @@ export const Button = ({ onPress, title, disabled }: ButtonProps) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={styles.button}
+      style={[styles.button, disabled && styles.disabled]}
       disabled={disabled}
     >
       <Text>{title}</Text>
@@ -26,5 +26,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  disabled: {
+    backgroundColor: '#D9D9D9',
   },
 });
